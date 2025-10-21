@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FindWeb: Direct Download Almost Anything</title>
+
+    <meta name="description" content="FindWeb: direct download almost anything like TV Series, Movies, Books, music, software, games, apk, and more. Take advantage of the powerful advanced search." />
+    <meta name="keywords" content="download,movies,games,music,softwares,epub,ebooks,pdf,mp3,songs,direct download,torrents,apk" />
+    <meta property="og:title" content="FindWeb: Direct Download Almost Anything" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://findweb.pages.dev/" />
+    <meta property="og:image" content="https://github.com/muneebwanee/FindWeb/static/images/site-image.png" />
+    <meta property="og:site_name" content="FindWeb" />
+    <meta property="og:description" content="FindWeb: direct download almost anything like TV Series, Movies, Books, music, software, games, apk, and more. Take advantage of the powerful advanced search." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://findweb.pages.dev/" />
+    <meta name="theme-color" content="#ede6f7" />
+    <link rel="shortcut icon" href="https://github.com/muneebwanee/FindWeb/raw/main/static/images/favicon.png" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      :root{
+        --lav-50: #fbf7ff;
+        --lav-100: #f2eafd;
+        --lav-200: #e6d9fb;
+        --lav-300: #d6c6f6;
+        --lav-400: #c2aef0;
+        --lav-500: #a889e9;
+        --lav-600: #8460d9;
+        --lav-700: #5d3db8;
+        --glass-bg: rgba(255,255,255,0.12);
+        --glass-border: rgba(255,255,255,0.14);
+        --text: #1b122b;
+        --muted: #6b617b;
+        --radius: 16px; /* Increased base radius */
+        --radius-lg: 24px; /* For large cards */
+      }
+
+      [data-theme="dark"]{
+        --lav-50: #0f0c12;
+        --lav-100: #14101a;
+        --lav-200: #20162b;
+        --lav-300: #3a2449;
+        --lav-400: #5b3a7a;
+        --lav-500: #7b5fb0;
+        --lav-600: #9c85e0;
+        --glass-bg: rgba(255,255,255,0.04);
+        --glass-border: rgba(255,255,255,0.06);
+        --text: #f3eef8;
+        --muted: #d2cbe0;
+      }
+
+      html,body{
+        height:100%;
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        /* Softer gradient */
+        background: linear-gradient(180deg, var(--lav-50) 0%, var(--lav-100) 100%);
+        color:var(--text);
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+      }
+      
+      [data-theme="dark"] body,
+      [data-theme="dark"] html {
+        /* Solid dark bg for dark mode */
+        background: var(--lav-50);
+      }
+
+      /* Container look */
+      .site-hero{
+        padding: 5.5rem 1rem;
+        background: linear-gradient(135deg, rgba(138,100,233,0.12), rgba(169,137,233,0.06));
+        backdrop-filter: blur(8px) saturate(120%);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 10px 30px rgba(103,66,170,0.08);
+      }
+      [data-theme="dark"] .site-hero {
+         background: linear-gradient(135deg, rgba(156, 133, 224, 0.08), rgba(169,137,233,0.04));
+      }
+
+      /* Liquid glass buttons */
+      .btn-liquid{
+        border-radius: var(--radius);
+        padding: 0.55rem 1rem;
+        background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.22));
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 6px 18px rgba(98,64,183,0.12);
+        transition: transform .12s ease, box-shadow .12s ease;
+        backdrop-filter: blur(6px);
+        color: var(--text);
+      }
+      .btn-liquid:hover{ transform: translateY(-3px); box-shadow: 0 12px 30px rgba(98,64,183,0.18); }
+      
+      [data-theme="dark"] .btn-liquid {
+         background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      }
+
+      /* Primary lavender button */
+      .btn-primary-custom{
+        background: linear-gradient(90deg,var(--lav-600),var(--lav-500));
+        color: white;
+        border: none;
+        box-shadow: 0 8px 26px rgba(105,73,200,0.18);
+        transition: transform .12s ease, box-shadow .12s ease;
+        border-radius: var(--radius);
+        padding: 0.55rem 1rem;
+      }
+       .btn-primary-custom:hover{ 
+         transform: translateY(-3px); 
+         box-shadow: 0 12px 30px rgba(105,73,200,0.25);
+         color: white;
+      }
+      
+      .btn-outline-glass{
+        background: transparent;
+        border: 1px solid var(--glass-border);
+      }
+      
+      /* Header / Navbar */
+      .navbar{
+        background: linear-gradient(90deg, rgba(255,255,255,0.65), rgba(255,255,255,0.35));
+        border-radius: var(--radius);
+        padding: .6rem 1rem;
+        backdrop-filter: blur(6px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 8px 24px rgba(98,64,183,0.05);
+      }
+      [data-theme="dark"] .navbar{
+        background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      }
+      
+      .navbar-brand {
+        color:var(--lav-700) !important;
+      }
+      [data-theme="dark"] .navbar-brand {
+        color:var(--lav-600) !important;
+      }
+
+      /* Logo Box */
+      .logo-box {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--lav-600), var(--lav-500));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      
+      /* Style toggler to match */
+      .navbar-toggler {
+        border: 1px solid var(--glass-border);
+        color: var(--text);
+      }
+      .navbar-toggler-icon {
+        background-image: none;
+        content: '\F5D2'; /* bi-list */
+        font-family: 'bootstrap-icons';
+        color: var(--text);
+        font-size: 1.5rem;
+        line-height: 1;
+      }
+      
+      /* Mobile nav menu */
+      @media (max-width: 991.98px) {
+        .navbar-collapse {
+          background: var(--lav-50);
+          border-radius: var(--radius);
+          padding: 1rem;
+          margin-top: 0.5rem;
+          border: 1px solid var(--glass-border);
+        }
+        .navbar-nav {
+          align-items: flex-start !important;
+        }
+         .navbar-nav .btn, .navbar-nav .btn-liquid {
+           width: 100%;
+           margin-bottom: 0.5rem;
+           text-align: left;
+         }
+      }
+
+      /* Search box & Info Card */
+      .search-card, .info-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.35));
+        border-radius: 20px; /* Softer radius */
+        padding: 1.5rem;
+        box-shadow: 0 12px 34px rgba(98,64,183,0.06);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(4px);
+      }
+      .search-card { padding: 1rem; } /* Keep search card padding smaller */
+      
+      [data-theme="dark"] .search-card,
+      [data-theme="dark"] .info-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      }
+      
+      .form-control{
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,0.06);
+        padding: 0.65rem 1rem;
+      }
+      [data-theme="dark"] .form-control{
+        background: var(--lav-100);
+        color:var(--text);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+      [data-theme="dark"] .form-control::placeholder {
+        color: var(--muted);
+      }
+
+      /* Premium footer styles */
+      footer.site-footer-wrapper{
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+      .site-footer{
+        border-radius: var(--radius-lg);
+        padding: 2.5rem;
+        background: linear-gradient(180deg, rgba(138,100,233,0.06), rgba(255,255,255,0.02));
+        color:var(--muted);
+      }
+      [data-theme="dark"] .site-footer{
+        background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.18));
+      }
+      .site-footer a {
+        color: var(--lav-600);
+        text-decoration: none;
+      }
+      .site-footer a:hover {
+        text-decoration: underline;
+      }
+      [data-theme="dark"] .site-footer a {
+        color: var(--lav-500);
+      }
+
+      /* small helpers */
+      .text-muted { color:var(--muted) !important; }
+      .brand-accent { color: var(--lav-700); font-weight:700; }
+      [data-theme="dark"] .brand-accent { color: var(--lav-600); }
+      
+      /* Theme icon toggle */
+      [data-theme="light"] #theme-icon-light { display: none !important; }
+      [data-theme="light"] #theme-icon-dark { display: inline-block !important; }
+      [data-theme="dark"] #theme-icon-light { display: inline-block !important; }
+      [data-theme="dark"] #theme-icon-dark { display: none !important; }
+      
+      /* Dropdown menu styling */
+      .dropdown-menu {
+        background: var(--lav-50);
+        border-radius: var(--radius);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 8px 24px rgba(98,64,183,0.1);
+        backdrop-filter: blur(5px);
+      }
+      [data-theme="dark"] .dropdown-menu {
+         background: var(--lav-200);
+      }
+      .dropdown-item {
+        color: var(--text);
+        padding: .5rem 1rem;
+      }
+      .dropdown-item:hover, .dropdown-item:focus {
+        background-color: var(--lav-100);
+        color: var(--text);
+      }
+      [data-theme="dark"] .dropdown-item:hover,
+      [data-theme="dark"] .dropdown-item:focus {
+        background-color: var(--lav-300);
+      }
+
+
+      /* responsive tweaks */
+      @media (max-width:768px){
+        .site-hero{ padding: 3rem 1rem; }
+      }
+      @media (max-width:576px){
+        .site-hero{ padding: 2.5rem 1rem; }
+        .display-5 { font-size: calc(1.4rem + 1.8vw); } /* smaller h1 on mobile */
+      }
+    </style>
+
+    <script>
+      // updated base url
+      const baseUrl = 'https://findweb.pages.dev';
+      
+      // simple theme helper
+      (function(){
+        const preferDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const stored = localStorage.getItem('findweb-theme');
+        const theme = stored || (preferDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+      
+      function toggleTheme() {
+        const cur = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = cur === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('findweb-theme', next);
+      }
+      
+      // Set initial icon state on load
+      document.addEventListener('DOMContentLoaded', () => {
+         const theme = document.documentElement.getAttribute('data-theme') || 'light';
+         // The CSS handles showing/hiding, no JS needed here now
+      });
+    </script>
+  </head>
+
+  <body>
+    
+    <header class="py-3 container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          
+          <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="/">
+            <div class="logo-box">FW</div>
+            <div>
+              <div style="line-height:1;font-size:1.1rem;font-weight:800;">FindWeb</div>
+              <small class="text-muted" style="font-size: 0.75rem;letter-spacing: 0.5px;">Direct Download Tool</small>
+            </div>
+          </a>
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="mainNav">
+            <div class="navbar-nav d-flex align-items-center gap-2 ms-auto">
+              
+              <a class="btn btn-sm btn-outline-glass btn-liquid d-flex align-items-center gap-2" href="/" aria-label="home"><i class="bi bi-house-door-fill"></i> Home</a>
+              <a class="btn btn-sm btn-outline-glass btn-liquid" href="https://www.freeprivacypolicy.com/live/70bb5b7f-1b74-4019-9ab6-a91bd978fc10">Privacy</a>
+              <a class="btn btn-sm btn-outline-glass btn-liquid" href="https://www.freeprivacypolicy.com/live/6aaf761a-8527-42d3-bfb6-26228a5cbca6">T&C</a>
+
+              <button class="btn btn-sm btn-liquid" onclick="toggleTheme()" title="Toggle light/dark" aria-label="Toggle theme">
+                <i class="bi bi-moon-stars-fill" id="theme-icon-dark"></i>
+                <i class="bi bi-sun-fill" id="theme-icon-light"></i>
+              </button>
+
+              <a class="btn btn-sm btn-primary-custom d-flex align-items-center gap-2" href="https://github.com/muneebwanee/FindWeb" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub">
+                <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true" fill="currentColor"><path d="M8 12.026l3.717 2.317-.997-4.102L14 7.844l-4.225-.364L8 3 6.225 7.48 2 7.844l3.28 2.397-.997 4.102L8 12.026z"></path></svg>
+                Star on GitHub
+              </a>
+              
+            </div>
+          </div>
+          
+        </div>
+      </nav>
+    </header>
+
+
+    <main class="container">
+      <section class="site-hero mb-4">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-7">
+              <h1 class="display-5 fw-bolder mb-3">Direct Download Anything</h1>
+              <p class="lead text-muted mb-4">Open directory search with dorks — search smarter across multiple engines for direct downloads.</p>
+
+              <form id="searchForm" class="search-card" onsubmit="performSearch(event)" style="max-width:800px;">
+                <div class="row g-2 align-items-center">
+                  
+                  <div class="col-lg-4">
+                    <div class="row g-2">
+                      <div class="col-6">
+                        <div class="dropdown w-100">
+                          <button class="btn btn-light w-100 btn-liquid dropdown-toggle text-truncate" type="button" data-bs-toggle="dropdown" id="fileTypeBTN">File Type</button>
+                          <ul class="dropdown-menu w-100">
+                            <li><button class="dropdown-item" type="button" onclick="set_file_type('video', this)"><i class="bi bi-film me-2"></i>Tv/Movies/Video</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_file_type('ebook', this)"><i class="bi bi-book-fill me-2"></i>Books</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_file_type('audio', this)"><i class="bi bi-music-note-beamed me-2"></i>Music</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_file_type('archive', this)"><i class="bi bi-archive-fill me-2"></i>Software/Games</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_file_type('picture', this)"><i class="bi bi-image me-2"></i>Images</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_file_type('all', this)"><i class="bi bi-asterisk me-2"></i>Others</button></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="col-6">
+                        <div class="dropdown w-100">
+                          <button class="btn btn-light w-100 btn-liquid dropdown-toggle" type="button" data-bs-toggle="dropdown" id="engineBTN"><i class="bi bi-search"></i> Google</button>
+                          <ul class="dropdown-menu w-100">
+                            <li><button class="dropdown-item" type="button" onclick="set_engine('google', this)">Google</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_engine('bing', this)">Bing</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_engine('duckduckgo', this)">DuckDuckGo</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_engine('startpage', this)">StartPage</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="set_engine('filepursuit', this)">FilePursuit</button></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-5">
+                    <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search anything..." aria-label="Search input" required />
+                  </div>
+
+                  <div class="col-lg-3">
+                    <input type="hidden" id="fileType" value="all" />
+                    <input type="hidden" id="engine" value="google" />
+                    <button type="submit" class="btn btn-primary-custom w-100 btn-lg" aria-label="Search"><i class="bi bi-search me-2"></i>Search</button>
+                  </div>
+                  
+                </div>
+              </form>
+
+              <div class="mt-3">
+                <small class="text-muted">Tip: Use filename extensions for better results (e.g., <code>"dune part 2" mkv</code>).</small>
+              </div>
+            </div>
+
+            <div class="col-lg-5 text-center d-none d-lg-block">
+              <img src="https://github.com/muneebwanee/FindWeb/raw/main/static/images/hero-illustration.png" alt="search illustration" style="max-width:360px;opacity:.95;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4 info-card">
+        <h2 class="fw-bold brand-accent">Open Directory Search</h2>
+        <p class="text-muted mb-2">FindWeb is an advanced search tool that helps you to <strong>direct download almost anything</strong> like TV shows, movies, software, ebooks, music, pictures, and more. Use advanced dorks across engines to locate direct-download index pages and files.</p>
+        <p class="text-muted mb-0">Using <span class="brand-accent">findweb.pages.dev</span> you can perform a deep search across major search engines with our dork presets and filters.</p>
+      </section>
+    </main>
+
+    <footer class="container site-footer-wrapper">
+      <div class="site-footer">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h5 class="mb-1 brand-accent">FindWeb</h5>
+            <p class="mb-1 text-muted">© <span id="year"></span> FindWeb - All Rights Reserved.</p>
+            <p class="small text-muted mb-0">Made with ❤️ from Kashmir. Built and Maintained by <a href="https://github.com/muneebwanee" target="_blank" rel="noopener noreferrer">muneebwanee</a>.</p>
+          </div>
+          <div class="col-md-6 text-md-end mt-3 mt-md-0">
+            <a class="btn btn-sm btn-liquid" href="https://github.com/muneebwanee/FindWeb/issues" target="_blank">Contact Us</a>
+            <a class="btn btn-sm btn-outline-glass btn-liquid" href="https://www.freeprivacypolicy.com/live/70bb5b7f-1b74-4019-9ab6-a91bd978fc10" target="_blank">Privacy</a>
+            <a class="btn btn-sm btn-outline-glass btn-liquid" href="https://www.freeprivacypolicy.com/live/6aaf761a-8527-42d3-bfb6-26228a5cbca6" target="_blank">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // populate year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // dropdown setters
+      function set_file_type(type, el){
+        document.getElementById('fileType').value = type;
+        const btn = document.getElementById('fileTypeBTN');
+        btn.innerHTML = (el && el.innerHTML) ? el.innerHTML.trim() : type;
+      }
+      function set_engine(engine, el){
+        document.getElementById('engine').value = engine;
+        const btn = document.getElementById('engineBTN');
+        btn.innerHTML = '<i class="bi bi-search"></i> ' + ((el && el.textContent) ? el.textContent.trim() : engine);
+      }
+      
+      // Set default file type on load
+      set_file_type('all', document.querySelector('button[onclick="set_file_type(\'all\', this)"]'));
+
+      // Search routine (open a new window for robust UX)
+      function performSearch(e){
+        if(e) e.preventDefault();
+        const q = document.getElementById('searchInput').value.trim();
+        if(!q){ document.getElementById('searchInput').focus(); return; }
+
+        const engine = document.getElementById('engine').value || 'google';
+        const ftype = document.getElementById('fileType').value || 'all';
+
+        // Build dork
+        let dork = `intitle:"index of" "${q}"`;
+        if(ftype === 'video') dork += ' (mp4 | mkv | avi | webm)';
+        if(ftype === 'ebook') dork += ' (pdf | epub | mobi)';
+        if(ftype === 'audio') dork += ' (mp3 | flac | wav)';
+        if(ftype === 'archive') dork += ' (zip | rar | iso | dmg | 7z)';
+        if(ftype === 'picture') dork += ' (jpg | png | webp)';
+        if(ftype === 'all') dork = `intitle:"index of" "${q}"`; // Keep it simple for 'all'
+
+        // Choose engine base URL
+        let url = '';
+        const encodedDork = encodeURIComponent(dork);
+        
+        if(engine === 'bing') {
+            url = 'https://www.bing.com/search?q=' + encodedDork;
+        } else if(engine === 'duckduckgo') {
+            url = 'https://duckduckgo.com/?q=' + encodedDork;
+        } else if(engine === 'startpage') {
+            // Startpage is good at plain queries, dorks can be iffy
+            url = 'https://www.startpage.com/sp/search?q=' + encodeURIComponent(q);
+        } else if(engine === 'filepursuit') {
+            // FilePursuit doesn't need dorks
+            url = 'https://filepursuit.io/?q=' + encodeURIComponent(q);
+        } else {
+            // Google (default)
+            url = 'https://www.google.com/search?q=' + encodedDork;
+        }
+
+        window.open(url, '_blank');
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    </body>
+</html>
